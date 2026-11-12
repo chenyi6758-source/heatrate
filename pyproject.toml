@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "heatrate"
+version = "0.1.0"
+description = "Heat-rate curve generator for coal-fired units: TESPy reheat regenerative cycle, sliding-pressure load sweep, piecewise-linear fuel-cost export for PyPSA and pandapower"
+readme = "README.md"
+license = { text = "BSD-3-Clause" }
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "pandas",
+    "scipy",
+    "tespy>=0.12",
+    "CoolProp",
+    "pandapower>=3.0",
+    "pypsa>=1.0",
+]
+authors = [{ name = "ChenYi-Nnergy" }]
+keywords = ["coal-fired", "heat-rate", "Rankine", "reheat", "TESPy", "PyPSA", "pandapower", "unit-commitment", "off-design"]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[project.scripts]
+heatrate = "heatrate.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+exclude = ["src/heatrate/data.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W"]
